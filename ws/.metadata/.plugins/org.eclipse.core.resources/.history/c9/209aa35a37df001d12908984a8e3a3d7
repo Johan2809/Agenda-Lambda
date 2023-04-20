@@ -109,25 +109,25 @@ public class Agenda implements Serializable {
 	}
 
 	public boolean existeContacto(Contacto contacto) {
-	    // Se Busca el contacto en la lista
+	    // Buscamos el contacto en la lista
 	    return Arrays.stream(listaContactos).anyMatch(c -> c != null && c.equals(contacto));
 	}
 
 	public void listarContactos() {
-		// Se imprime "Lista de contactos"
+		// Imprimimos el encabezado
 		System.out.println("Lista de contactos:");
-		// Se Recorre la lista de contactos y se imprime
+		// Recorremos la lista de contactos y los imprimimos
 		Arrays.stream(listaContactos).filter(c -> c != null).forEach(System.out::println);
 	}
 
 	public String buscaContacto(String nombre) {
-		// Se Busca el contacto por nombre
+		// Buscamos el contacto por nombre
 		Optional<Contacto> contacto = Arrays.stream(listaContactos).filter(c -> c != null).filter(c -> c.getNombre().equalsIgnoreCase(nombre)).findFirst();
-		// Si se encuentra el contacto se retorna su teléfono
+		// Si encontramos el contacto, devolvemos su teléfono
 		if (contacto.isPresent()) {
 			return "Teléfono de " + nombre + ": " + contacto.get().getTelefono();
 		}
-		// Si no se encuentra el contacto, se devuelve un mensaje indicando que no
+		// Si no encontramos el contacto, devolvemos un mensaje indicando que no
 		// se encontró
 		else {
 			return "No se encontró el contacto.";
@@ -135,11 +135,12 @@ public class Agenda implements Serializable {
 	}
 
 	public void eliminarContacto(Contacto contacto) {
-		//	Se Busca la posición del contacto en la lista
+		// Buscamos la posición del contacto en la lista
 		int index = IntStream.range(0, listaContactos.length)
 				.filter(i -> listaContactos[i] != null && listaContactos[i].equals(contacto)).findFirst().orElse(-1);
-		// Si se encontró el contacto se elimina de la lista
-		// Si no se encontró, se imprime un mensaje indicando que no se encontró el contacto
+		// Si se encontró el contacto, lo eliminamos de la lista
+		// Si no se encontró, imprimimos un mensaje indicando que no se encontró
+		// el contacto
 		if (index != -1) {
 			listaContactos[index] = null;
 			System.out.println("Contacto eliminado correctamente.");
@@ -149,14 +150,14 @@ public class Agenda implements Serializable {
 	}
 
 	public boolean agendaLlena() {
-		// Se Verifica si existe algún contacto en la lista que sea null Si hay
+		// Verificamos si existe algún contacto en la lista que sea null Si hay
 		// al menos un contacto null, la agenda no está llena
 		// Si todos los contactos son distintos de null, la agenda está llena
 		return Arrays.stream(listaContactos).allMatch(Objects::nonNull);
 	}
 
 	public int huecosLibres() {
-		// Se Cuenta el número de contactos que son null en la lista
+		// Contamos el número de contactos que son null en la lista
 		// Este número representa la cantidad de huecos libres en la agenda
 		return (int) Arrays.stream(listaContactos).filter(Objects::isNull).count();
 	}

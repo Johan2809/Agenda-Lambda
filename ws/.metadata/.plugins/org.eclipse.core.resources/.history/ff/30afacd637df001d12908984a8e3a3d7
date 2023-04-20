@@ -156,7 +156,7 @@ public class Agenda implements Serializable {
 	}
 
 	public int huecosLibres() {
-		// Se Cuenta el número de contactos que son null en la lista
+		// Contamos el número de contactos que son null en la lista
 		// Este número representa la cantidad de huecos libres en la agenda
 		return (int) Arrays.stream(listaContactos).filter(Objects::isNull).count();
 	}
