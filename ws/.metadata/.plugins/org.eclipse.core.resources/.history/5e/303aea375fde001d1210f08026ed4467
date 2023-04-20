@@ -1,0 +1,59 @@
+package model;
+
+import java.util.ArrayList;
+
+public class Reunion {
+    private String descripcion;
+    private String fecha;
+    private ArrayList<Contacto> contactosAsistentes;
+
+    public Reunion(String descripcion, String fecha) {
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.contactosAsistentes = new ArrayList<Contacto>();
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public void agregarContactoAsistente(Contacto contacto) {
+        if (contactosAsistentes.size() >= 10) {
+            System.out.println("No se pueden agregar más contactos a esta reunión.");
+            return;
+        }
+
+        if (contactosAsistentes.contains(contacto)) {
+            System.out.println("Este contacto ya está en la lista de asistentes.");
+            return;
+        }
+
+        contactosAsistentes.add(contacto);
+        System.out.println("Contacto añadido a la lista de asistentes.");
+    }
+
+    public void eliminarContactoAsistente(Contacto contacto) {
+        if (contactosAsistentes.contains(contacto)) {
+            contactosAsistentes.remove(contacto);
+            System.out.println("Contacto eliminado de la lista de asistentes.");
+        } else {
+            System.out.println("Este contacto no está en la lista de asistentes.");
+        }
+    }
+
+    public ArrayList<Contacto> getContactosAsistentes() {
+        return contactosAsistentes;
+    }
+}

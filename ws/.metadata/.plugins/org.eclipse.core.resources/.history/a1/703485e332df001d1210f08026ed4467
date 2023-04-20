@@ -1,0 +1,158 @@
+package model;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.IntStream;
+
+public class Agenda implements Serializable {
+
+	/**
+	 *
+	 */
+	// private static final long serialVersionUID = 1L;
+	private String nombre;
+	private Contacto[] listaContactos;
+	private Grupo[] listaGrupos;
+	private Reunion[] listaReuniones;
+
+	public Agenda(String nombre, int numeroContactos, int numeroGrupos, int numeroReuniones) {
+		super();
+		this.nombre = nombre;
+		this.listaContactos = new Contacto[numeroContactos];
+		this.listaGrupos = new Grupo[numeroGrupos];
+		this.listaReuniones = new Reunion[numeroReuniones];
+	}
+
+	public Agenda() {
+		super();
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Contacto[] getListaContactos() {
+		return listaContactos;
+	}
+
+	public void setListaContactos(Contacto[] listaContactos) {
+		this.listaContactos = listaContactos;
+	}
+
+	public Grupo[] getListaGrupos() {
+		return listaGrupos;
+	}
+
+	public void setListaGrupos(Grupo[] listaGrupos) {
+		this.listaGrupos = listaGrupos;
+	}
+
+	public Reunion[] getListaReuniones() {
+		return listaReuniones;
+	}
+
+	public void setListaReuniones(Reunion[] listaReuniones) {
+		this.listaReuniones = listaReuniones;
+	}
+
+	@Override
+	public String toString() {
+		return "Agenda [nombre=" + nombre + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Agenda other = (Agenda) obj;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}
+	public void agregarContacto(Contacto newContacto) throws ContactoException {
+	    // Buscamos el contacto en la lista
+	    Contacto contacto = Arrays.stream(listaContactos).filter(c -> c != null).filter(c -> c.equals(newContacto)).findFirst().orElse(null);
+	    // Si ya existe, lanzamos una excepción
+	    if (contacto != null) {
+	        throw new ContactoException("El contacto ya existe");
+	    }
+	    // Si no existe, buscamos la primera posición disponible
+	    int posDisponible = IntStream.range(0, listaContactos.length).filter(i -> listaContactos[i] == null).findFirst().orElse(-1);
+	    // Si la agenda está llena, lanzamos una excepción
+	    if (posDisponible == -1) {
+	        throw new ContactoException("Agenda llena");
+	    }
+	    // Si hay posiciones disponibles, añadimos el nuevo contacto
+	    listaContactos[posDisponible] = newContacto;
+	}
+
+	public void listarContactos() {
+	    // Imprimimos el encabezado
+	    System.out.println("Lista de contactos:");
+	    // Recorremos la lista de contactos y los imprimimos
+	    Arrays.stream(listaContactos).filter(c -> c != null).forEach(System.out::println);
+	}
+
+	public String buscaContacto(String nombre) {
+	    // Buscamos el contacto por nombre
+	    Optional<Contacto> contacto = Arrays.stream(listaContactos).filter(c -> c != null).filter(c -> c.getNombre().equalsIgnoreCase(nombre)).findFirst();
+	    // Si encontramos el contacto, devolvemos su teléfono
+	    if (contacto.isPresent()) {
+	        return "Teléfono de " + nombre + ": " + contacto.get().getTelefono();
+	    }
+	    // Si no encontramos el contacto, devolvemos un mensaje indicando que no se encontró
+	    else {
+	        return "No se encontró el contacto.";
+	    }
+	}
+
+	public void eliminarContacto(Contacto contacto) {
+	// Buscamos la posición del contacto en la lista
+	int index = IntStream.range(0, listaContactos.length).filter(i -> listaContactos[i] != null && listaContactos[i].equals(contacto)).findFirst().orElse(-1);
+	// Si se encontró el contacto, lo eliminamos de la lista
+	// Si no se encontró, imprimimos un mensaje indicando que no se encontró el contacto
+		if (index != -1) {
+			listaContactos[index] = null;
+			System.out.println("Contacto eliminado correctamente.");
+		}
+		else {
+	System.out.println("No se encontró el contacto.");
+	}
+	}
+
+	public boolean agendaLlena() {
+	// Verificamos si existe algún contacto en la lista que sea null Si hay al menos un contacto null, la agenda no está llena
+	// Si todos los contactos son distintos de null, la agenda está llena
+	return Arrays.stream(listaContactos).allMatch(Objects::nonNull);
+	}
+
+	public int huecosLibres() {
+	// Contamos el número de contactos que son null en la lista
+	// Este número representa la cantidad de huecos libres en la agenda
+	return (int) Arrays.stream(listaContactos).filter(Objects::isNull).count();
+	}
+
+}

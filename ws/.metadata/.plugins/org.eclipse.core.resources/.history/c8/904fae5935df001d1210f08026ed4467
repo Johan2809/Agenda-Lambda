@@ -1,0 +1,97 @@
+package model;
+
+public class Grupo {
+    private String nombre;               // Atributo que almacena el nombre del grupo
+    private Categoria categoria;         // Atributo que almacena la categoría del grupo
+    private Contacto[] listaContactos;   // Atributo que almacena la lista de contactos del grupo
+
+    /**
+     * Constructor de la clase Grupo
+     * @param nombre el nombre del grupo
+     * @param categoria la categoría del grupo
+     */
+    public Grupo(String nombre, Categoria categoria) {
+        this.nombre = nombre;
+        this.categoria = categoria;
+        this.listaContactos = new Contacto[10];   // Inicializa la lista de contactos con un tamaño de 10
+    }
+
+    /**
+     * Método que devuelve el nombre del grupo
+     * @return el nombre del grupo
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Método que establece el nombre del grupo
+     * @param nombre el nuevo nombre del grupo
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * Método que devuelve la categoría del grupo
+     * @return la categoría del grupo
+     */
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * Método que establece la categoría del grupo
+     * @param categoria la nueva categoría del grupo
+     */
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    /**
+     * Método que devuelve la lista de contactos del grupo
+     * @return la lista de contactos del grupo
+     */
+    public Contacto[] getListaContactos() {
+        return listaContactos;
+    }
+
+    /**
+     * Método que establece la lista de contactos del grupo
+     * @param listaContactos la nueva lista de contactos del grupo
+     */
+    public void setListaContactos(Contacto[] listaContactos) {
+        this.listaContactos = listaContactos;
+    }
+
+    /**
+     * Método que agrega un contacto a la lista de contactos del grupo
+     * @param contacto el contacto que se va a agregar
+     * @return true si el contacto se agrega correctamente, false si no hay espacio en la lista de contactos
+     */
+    public boolean agregarContacto(Contacto contacto) {
+        for (int i = 0; i < listaContactos.length; i++) {
+            if (listaContactos[i] == null) {
+                listaContactos[i] = contacto;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Método que elimina un contacto de la lista de contactos del grupo
+     * @param contacto el contacto que se va a eliminar
+     * @return true si el contacto se elimina correctamente, false si el contacto no existe en la lista de contactos
+     */
+    public boolean eliminarContacto(Contacto contacto) {
+        for (int i = 0; i < listaContactos.length; i++) {
+            if (listaContactos[i] != null && listaContactos[i].equals(contacto)) {
+                listaContactos[i] = null;
+                return true;
+            }
+        }
+        return false;
+    }
+}
+

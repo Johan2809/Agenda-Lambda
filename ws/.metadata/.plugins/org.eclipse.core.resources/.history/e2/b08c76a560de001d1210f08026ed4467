@@ -1,0 +1,104 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class Agenda {
+
+    private String nombre;
+    private Contacto[] listaContactos;
+
+    public Agenda(String nombre, int numeroContactos) {
+        this.nombre = nombre;
+        this.listaContactos = new Contacto[numeroContactos];
+    }
+
+    public void aniadirContacto(Contacto c) {
+        if (agendaLlena()) {
+            System.out.println("No se puede añadir más contactos. La agenda está llena.");
+            return;
+        }
+
+        if (existeContacto(c)) {
+            System.out.println("El contacto ya existe.");
+            return;
+        }
+
+        int posDisponible = obtenerPosicion();
+        listaContactos[posDisponible] = c;
+        System.out.println("Contacto añadido correctamente.");
+    }
+
+    public boolean existeContacto(Contacto c) {
+        for (Contacto contacto : listaContactos) {
+            if (contacto != null && contacto.equals(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void listarContactos() {
+        System.out.println("Lista de contactos:");
+        for (Contacto contacto : listaContactos) {
+            if (contacto != null) {
+                System.out.println(contacto);
+            }
+        }
+    }
+
+    public String buscaContacto(String nombre) {
+        for (Contacto contacto : listaContactos) {
+            if (contacto != null && contacto.getNombre().equalsIgnoreCase(nombre)) {
+                return "Teléfono de " + nombre + ": " + contacto.getTelefono();
+            }
+        }
+        return "No se encontró el contacto.";
+    }
+
+    public void eliminarContacto(Contacto c) {
+        boolean encontrado = false;
+        for (int i = 0; i < listaContactos.length; i++) {
+            if (listaContactos[i] != null && listaContactos[i].equals(c)) {
+                listaContactos[i] = null;
+                System.out.println("Contacto eliminado correctamente.");
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("No se encontró el contacto.");
+        }
+    }
+
+    public boolean agendaLlena() {
+        for (Contacto contacto : listaContactos) {
+            if (contacto == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int huecosLibres() {
+        int huecos = 0;
+        for (Contacto contacto : listaContactos) {
+            if (contacto == null) {
+                huecos++;
+            }
+        }
+        return huecos;
+    }
+
+    private int obtenerPosicion() {
+        for (int i = 0; i < listaContactos.length; i++) {
+            if (listaContactos[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+

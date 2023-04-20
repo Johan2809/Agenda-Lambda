@@ -1,0 +1,124 @@
+package model;
+
+import java.util.ArrayList;
+
+public class Reunion {
+	private String descripcion;
+	private String fecha;
+	private ArrayList<Contacto> contactosAsistentes;
+
+	/**
+	 *
+	 * Constructor de la clase Reunion.
+	 *
+	 * @param descripcion
+	 *            Descripción de la reunión.
+	 * @param fecha
+	 *            Fecha de la reunión.
+	 */
+	public Reunion(String descripcion, String fecha) {
+		this.descripcion = descripcion;
+		this.fecha = fecha;
+		this.contactosAsistentes = new ArrayList<Contacto>();
+	}
+
+	/**
+	 *
+	 * Método getter para obtener la descripción de la reunión.
+	 *
+	 * @return Descripción de la reunión.
+	 */
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	/**
+	 *
+	 * Método setter para establecer la descripción de la reunión.
+	 *
+	 * @param descripcion
+	 *            Descripción de la reunión.
+	 */
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	/**
+	 *
+	 * Método getter para obtener la fecha de la reunión.
+	 *
+	 * @return Fecha de la reunión.
+	 */
+	public String getFecha() {
+		return fecha;
+	}
+
+	/**
+	 *
+	 * Método setter para establecer la fecha de la reunión.
+	 *
+	 * @param fecha
+	 *            Fecha de la reunión.
+	 */
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+	/**
+	 *
+	 * Método getter para obtener la lista de contactos asistentes a la reunión.
+	 *
+	 * @return Lista de contactos asistentes a la reunión.
+	 */
+	public ArrayList<Contacto> getContactosAsistentes() {
+		return contactosAsistentes;
+	}
+
+	/**
+	 *
+	 * Método setter para establecer la lista de contactos asistentes a la
+	 * reunión.
+	 *
+	 * @param contactosAsistentes
+	 *            Lista de contactos asistentes a la reunión.
+	 */
+	public void setContactosAsistentes(ArrayList<Contacto> contactosAsistentes) {
+		this.contactosAsistentes = contactosAsistentes;
+	}
+
+	/**
+	 *
+	 * Método para agregar un contacto a la lista de asistentes a la reunión.
+	 *
+	 * @param contacto
+	 *            Contacto a agregar.
+	 */
+	public void agregarContactoAsistente(Contacto contacto) {
+		if (contactosAsistentes.size() >= 10) {
+			System.out.println("No se pueden agregar más contactos a esta reunión.");
+		}
+
+		if (contactosAsistentes.contains(contacto)) {
+			System.out.println("Este contacto ya está en la lista de asistentes.");
+		}
+
+		contactosAsistentes.add(contacto);
+		System.out.println("Contacto añadido a la lista de asistentes.");
+	}
+
+	/**
+	 *
+	 * Método para eliminar un contacto de la lista de asistentes a la reunión.
+	 *
+	 * @param contacto
+	 *            Contacto a eliminar.
+	 */
+	public void eliminarContactoAsistente(Contacto contacto) {
+		if (contactosAsistentes.contains(contacto)) {
+			contactosAsistentes.remove(contacto);
+			System.out.println("Contacto eliminado de la lista de asistentes.");
+		} else {
+			System.out.println("Este contacto no está en la lista de asistentes.");
+		}
+	}
+}
