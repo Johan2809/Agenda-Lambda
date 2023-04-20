@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="656.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.controller.BibliotecaController">
+   <children>
+      <TabPane layoutX="14.0" layoutY="14.0" prefHeight="601.0" prefWidth="475.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Estudiantes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="556.0" prefWidth="475.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5565410199556541" layoutX="14.0" layoutY="14.0" orientation="VERTICAL" prefHeight="546.0" prefWidth="454.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="261.0" prefWidth="452.0">
+                                 <children>
+                                    <Separator layoutY="29.0" prefHeight="1.0" prefWidth="438.0" />
+                                    <Label layoutX="14.0" layoutY="6.0" text="Informacion del Estudiante" textFill="#4227c9">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="20.0" layoutY="46.0" text="Nombre :" textFill="#4227c9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtNombreEstudiante" layoutX="103.0" layoutY="44.0" prefHeight="25.0" prefWidth="316.0" />
+                                    <TextField fx:id="txtApellido" layoutX="103.0" layoutY="85.0" prefHeight="25.0" prefWidth="316.0" />
+                                    <Label layoutX="20.0" layoutY="87.0" text="Apellidos :" textFill="#4227c9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="20.0" layoutY="133.0" text="Cedula :" textFill="#4227c9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtCedula" layoutX="103.0" layoutY="131.0" prefHeight="25.0" prefWidth="316.0" />
+                                    <Separator layoutX="14.0" layoutY="247.0" prefHeight="5.0" prefWidth="421.0" />
+                                    <Button fx:id="btnAgregar" layoutX="299.0" layoutY="264.0" mnemonicParsing="false" onAction="#agregarEstudianteEvent" prefHeight="25.0" prefWidth="96.0" text="Agregar" />
+                                    <Button fx:id="btnNuevo" layoutX="22.0" layoutY="264.0" mnemonicParsing="false" onAction="#nuevoEstudianteEvent" prefHeight="25.0" prefWidth="96.0" text="Nuevo" />
+                                    <Button fx:id="btnActualizar" layoutX="144.0" layoutY="264.0" mnemonicParsing="false" onAction="#actualizarEstudianteEvent" prefHeight="25.0" prefWidth="96.0" text="Actualizar" />
+                                    <TextField fx:id="txtUsuario" layoutX="103.0" layoutY="179.0" prefHeight="25.0" prefWidth="316.0" />
+                                    <Label layoutX="20.0" layoutY="181.0" prefHeight="20.0" prefWidth="59.0" text="Usuario :" textFill="#4227c9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="20.0" layoutY="216.0" text="Contrasenia :" textFill="#4227c9">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtContrasenia" layoutX="103.0" layoutY="214.0" prefHeight="25.0" prefWidth="316.0" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="223.0" prefWidth="452.0">
+                                 <children>
+                                    <TableView fx:id="tableEstudiantes" layoutX="20.0" layoutY="28.0" prefHeight="138.0" prefWidth="423.0">
+                                      <columns>
+                                        <TableColumn fx:id="columnNombre" prefWidth="75.0" text="Nombre" />
+                                        <TableColumn fx:id="columnCedula" prefWidth="75.0" text="Cedula" />
+                                          <TableColumn fx:id="columnApellidos" prefWidth="75.0" text="Apellidos" />
+                                      </columns>
+                                    </TableView>
+                                    <Button fx:id="btnEliminar" layoutX="341.0" layoutY="171.0" mnemonicParsing="false" onAction="#eliminarEstudianteEvent" prefHeight="25.0" prefWidth="96.0" text="Eliminar" />
+                                    <Label layoutX="20.0" layoutY="4.0" text="Listado de Estudiantes" textFill="#4227c9">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Libros">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
